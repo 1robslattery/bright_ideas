@@ -1,0 +1,48 @@
+@{
+	ViewData["Title"] = "Bright Ideas";
+}
+
+@model Idea
+
+<div class="row">
+	<div class="col-sm-4"><br>
+		<h2>Hi, @ViewBag.LoggedInUser.Name!</h2>
+	</div>
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4"><br>
+		<p><a href="/bright_idea" class="btn btn-link">Bright Ideas</a> | <a href="/Logout" class="btn btn-link">Logout</a></p>
+	</div>
+</div>
+
+	
+	<div class="row">
+		<div class="col-sm-2">
+			<p>@ViewBag.SelectedIdea.Creator.Name says:</p>
+		</div>
+		<div class="col-sm-10">
+			<textarea class="border border-dark">@ViewBag.SelectedIdea.IdeaPost</textarea><br>
+
+		</div>
+	</div><br><br><br>
+	<p><strong>People who liked this post:</strong></p>
+
+	<table class="table table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col"><strong>Alias</strong></th>
+				<th scope="col"><strong>Name</strong></th>
+			</tr>
+		</thead>
+		<tbody>
+
+			@foreach(var a in ViewBag.SelectedIdea.Users)
+			{
+				<tr>
+					<td><a href="/users/@a.User.UserID">@a.User.Alias</a></td>
+					<td>@a.User.Name</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+

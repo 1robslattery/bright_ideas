@@ -1,0 +1,24 @@
+@{
+	ViewData["Title"] = "Bright Ideas";
+}
+
+@model User
+
+<div class="row">
+	<div class="col-sm-4"><br>
+	</div>
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4"><br>
+		<p><a href="/bright_idea" class="btn btn-link">Bright Ideas</a> | <a href="/Logout" class="btn btn-link">Logout</a></p>
+	</div>
+</div>
+
+<p><strong>Name:</strong> @ViewBag.SelectedUser.Name</p>
+<p><strong>Alias:</strong> @ViewBag.SelectedUser.Alias</p>
+<p><strong>Email:</strong> @ViewBag.SelectedUser.Email</p>
+
+<hr>
+
+<p><strong>Total Number of Posts:</strong> @ViewBag.SelectedUser.Posts</p>
+<p><strong>Total Number of Likes:</strong> @ViewBag.SelectedUser.Ideas.Count</p>

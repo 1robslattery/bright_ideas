@@ -1,0 +1,87 @@
+@{
+	ViewData["Title"] = "Bright Ideas";
+}
+
+@model Idea
+
+<div class="row">
+	<div class="col-sm-4"><br>
+		<h2>Hi, @ViewBag.LoggedInUser.Name!</h2>
+	</div>
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4"><br>
+		<p><a href="/Logout" class="btn btn-link">Logout</a></p>
+	</div>
+</div>
+
+<div class="form-group">
+	<form action="/IdeaProcess" method="post">
+		<div class="row">
+			<div class="col-sm-8">
+				<span asp-validation-for="IdeaPost" style="color:red;"></span>
+				<textarea name="IdeaPost" cols="30" rows="3" class="form-control"></textarea>
+			</div>
+			
+			<div class="col-sm-2">
+				<input name="UserID" type="hidden" value="@ViewBag.LoggedInUser.UserID">
+				<input type="submit" value="Add Idea!" class="btn btn-outline-dark">
+			</div>
+		</div>
+	</form>
+</div>
+
+@if (ViewBag.allIdeas != null)
+{
+	foreach(Idea i in ViewBag.allIdeas)
+	{
+		bool isLiked = false;
+		bool isCreated = false;
+		if(i.Creator.UserID ==ViewBag.LoggedInUser.UserID)
+		{
+			isCreated = true;
+		}
+		string persons = "person";
+		foreach(var a in i.Users)
+		{
+			if(a.UserID == ViewBag.LoggedInUser.UserID)
+			{
+				isLiked = true;
+			}
+		}
+		if(i.Users.Count == 1)
+		{
+			persons = "person likes";
+		}
+		else
+		{
+			persons = "people like";
+		}
+		Console.WriteLine(@persons);
+		<div class="row">
+			<div class="col-sm-2">
+				<p><a href="/users/@i.UserID">@i.Creator.Name</a> says:</p>
+			</div>
+			<div class="col-sm-8">
+				<textarea cols="30" rows="3" class="border border-dark">@i.IdeaPost</textarea><br>
+				@if(isLiked)
+				{
+					<a href="/unLike/@i.IdeaID" class="btn btn-link">unLike</a> <a href="/bright_ideas/@i.IdeaID">@i.Likes</a> <span>@persons this.</span>	
+				}
+				else
+				{
+					<a href="/Likes/@i.IdeaID" class="btn btn-link">Like</a> <a href="/bright_ideas/@i.IdeaID">@i.Likes</a> <span>@persons this. </span>
+				}
+				@if(isCreated)
+				{
+				<span><a style="vertical-align: middle; color:red" href="/Delete/@i.IdeaID"><strong> X</strong></a></span><br>
+				}
+				else
+				{
+					<br>
+				}
+			</div>
+
+		</div><br>
+	}
+}

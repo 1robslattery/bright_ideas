@@ -1,0 +1,39 @@
+
+@model User
+
+<h3>Register</h3>
+
+<!-- The form needs to do something rather than just be a page with a bunch of boxes and a button -->
+<!-- Just supply a route named register and then we need the form to post -->
+<form action="register" method="post">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label>Name</label>
+				<input type="text" name="Name" class="form-control">
+				<span asp-validation-for="Name" style="color:red;"></span>
+			</div>
+				<div class="form-group">
+				<label>Alias</label>
+				<input type="text" name="Alias" class="form-control">
+				<span asp-validation-for="Alias" style="color:red;"></span>
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input type="text" name="Email" class="form-control">
+				<span asp-validation-for="Email" style="color:red;"></span>
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" name="Password" class="form-control">
+				<span asp-validation-for="Password" style="color:red;"></span>
+			</div>
+			<div class="form-group">
+				<label>ConfirmPassword</label>
+				<input type="password" name="ConfirmPassword" class="form-control">
+				<span asp-validation-for="ConfirmPassword" style="color:red;"></span>
+			</div>
+			<input type="submit" value="Register" class="btn btn-outline-primary">
+		</div>
+	</div>
+</form>

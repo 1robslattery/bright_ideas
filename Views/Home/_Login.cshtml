@@ -1,0 +1,20 @@
+@model LoginUser
+
+<h3>Login</h3>
+<form action="login" method="post">
+	<div class="form-group">
+		<label>Email</label>
+		<input name="LoginEmail" value="rob@dojo.com" class="form-control">
+		<p>
+			<span asp-validation-for="LoginEmail" style="color:red;"></span>
+		</p>
+	</div>
+	<div class="form-group">
+		<label>Password</label>
+		<input type="password" value="password!23" name="LoginPassword" class="form-control">
+		<p>
+			<span asp-validation-for="LoginPassword" style="color:red;"></span>
+		</p>
+	</div>
+	<input type="submit" value="Log In" class="btn btn-outline-success">
+</form>
